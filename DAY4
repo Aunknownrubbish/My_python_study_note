@@ -1,0 +1,72 @@
+DAY 4
+I learned the first half of chapter 8-----Function!
+今天学了第八章的前一半
+
+I learned how to define functions (parameters and arguments) and how to pass arguments (location, keyword, default value)
+我学会了如何定义函数（形参和实参），以及如何传递实参（位置，关键字，默认值）
+
+Then, I began to learn the concept of return value. Functions can not only output directly, but also process data and return a certain value
+接着，我开始学习返回值这个概念，函数不光能直接输出，还可以对数据进行处理，并返回一定的值
+
+---Exempel---
+def get_formatted_name(first_name, last_name):
+    """返回全名"""
+    full_name = first_name + ' ' + last_name
+    return full_name.title()
+musician = get_formatted_name('John', 'Smith')
+print(musician)
+
+---Q---
+def get_formatted_name(first_name, last_name):
+    """返回全名"""
+    full_name = first_name + ' ' + last_name
+    print(full_name.title())
+get_formatted_name('John', 'Smith')
+
+You can get the same result by writing this way. What is the use of return?
+这样写可以得到相同的结果，那么return有什么用呢？
+
+Then I learned how to make the argument optional
+接着，我学习了如何让arugment变成可选的
+
+并且在案例中学到了，Python对于非空字符串的判断是True,None 可以理解为占位符
+And I learned from the case that Python's judgment on non empty strings is true，None can be understood as a placeholder
+
+---Exemple---
+# def get_formatted_name(first_name, last_name, middle_name = " "):
+#     """返回全名"""
+#     if middle_name:
+#         full_name = f"{first_name} {middle_name}  {last_name}"
+#     else:
+#         full_name = f"{first_name} {last_name}"
+#     return full_name.title()
+# musician = get_formatted_name("join","smith","carolina")
+# print(musician)
+# artsit = get_formatted_name("sarah", "whhite")
+# print(artsit)
+
+---Exemple---
+# def build_person(first, last, age = None):
+#     """建立个人信息"""
+#     person = {'first': first, 'last': last}
+#     if age:
+#         person["age"] = age
+#     else:
+#         person["age"] = None
+#     return person
+# musician = build_person("john", "smith", 18)
+# print(musician)
+# artist = build_person("jack", "harry", )
+# print(artist)
+
+I have encountered great difficulties in learning to transmit lists to functions. 
+There are always various problems that cause my program to fail to run normally.
+Sometimes I know what the problem is, sometimes I don 't.
+我在学习向函数转递列表时遭遇了较大的困难，
+总是会有各种各样的问题导致我的程序无法正常运行。
+有时候我知道问题出在哪里，有时候则不知道。
+
+I only learned a little bit after going through it like this. 
+You know, I learned from 12:00 at noon to 9:00 at night, and I took a break for twoorthree hours.
+这样子捋一遍下来居然只学了这么一点内容。
+要知道我可是从中午12点差不多学到晚上9点，中间就休息了两三个小时。
