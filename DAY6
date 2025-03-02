@@ -1,0 +1,72 @@
+This day is my nightmare. This grammar is too difficult - class
+这一天简直是我的噩梦，这个语法实在是太难了——类
+
+9.1.1
+The first is to create a class. The first letter should be capitalized
+首先是创建类，首字母要大写
+
+# class Dog:
+#     '''模拟小狗的简单尝试'''
+#     def __init__(self, name, age):
+#         """初始化属性name和age"""
+#         self.name = name
+#         self.age = age
+#     def sit(self):
+#         """模拟小狗坐下来"""
+#         print(f"{self.name} is now sitting.")
+#     def roll_over(self):
+#         """模拟小狗在打滚"""
+#         print(f"{self.name} is rolling over.")
+
+
+There are many knowledge points involved here. I will come together
+这里涉及很多知识点，我将一一道来
+
+__init__()
+This is a special method. Whenever I create an instance based on the dog class, python will automatically run it
+这是一个特殊的方法， 每当我根据Dog类创建实例的时候，Python会自动运行它
+
+Here, we define the \u init\u () ⽅ method to include three formal parameters: self, name, and age.
+在这里，我们将 __init__() ⽅法定义成包含三个形参：self、name 和 age。
+
+Among them, the formal parameter self is indispensable, and must be in front of other formal parameters.
+这其中，形参 self 必不可少，⽽且必须位于其他形参的前⾯。
+
+This is because when Python calls this method to create a dog instance, it will automatically pass the argument self.
+这是因为当 Python 调⽤这个⽅法来创建 Dog 实例时，将⾃动传⼊实参 self。
+
+Each method call associated with an instance automatically passes the self argument,
+which is a reference to the instance itself, giving the instance access to properties and methods in the class.
+每个与实例相关联的⽅法调⽤都会⾃动传递实参 self，该实参是⼀个指向实例本⾝的引⽤，让实例能够访问类中的属性和⽅法。
+
+When we create a dog instance, python will call the  method of the dog class. We will pass the name and age to dog () through the arguments;
+当我们创建 Dog 实例时，Python 将调⽤ Dog类的 __init__() ⽅法。我们将通过实参向 Dog() 传递名字和年龄；
+
+Self will transfer automatically, so we are not required to transfer. 
+Whenever we create an instance based on the dog class, we only need to provide values for the last two formal parameters (name and age).
+self 则会⾃动传递，因此不需要我们来传递。每当我们根据 Dog 类创建实例时，都只需给最后两个形参（name 和 age）提供值。
+
+9.1.2
+Create instances from classes
+根据类创建实例
+
+# my_dog = Dog("baiwan",1)
+# print(f"My dog's name is {my_dog.name}.")
+# print(f"My dog's age is {my_dog.age}.")
+
+To process this line of code, Python calls the __init__() method of the Dog class and passes in the arguments 'baiwan' and 1.
+在处理这⾏代码时，Python 调⽤Dog 类的 __init__() ⽅法，并传⼊实参 'baiwan' 和 1。
+
+__init__() method creates an instance that represents a specific puppy, and sets the attributes name and age with the values provided.
+__init__()⽅法创建⼀个表⽰特定⼩狗的实例，并且使⽤提供的值设置属性 name 和age。
+
+Next, Python returns an instance representing the puppy, and we assign that instance to the variable my_dog.
+接下来，Python 返回⼀个表⽰这条⼩狗的实例，⽽我们将这个实例赋给变量 my_dog。
+
+  0.1Access Properties  访问属性
+To access the properties of an instance, use a dot.
+要访问实例的属性，可使⽤点号。
+
+my_dog.name     print(f"My dog's name is {my_dog.name}.")
+
+
