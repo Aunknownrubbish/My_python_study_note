@@ -63,10 +63,276 @@ __init__()⽅法创建⼀个表⽰特定⼩狗的实例，并且使⽤提供的�
 Next, Python returns an instance representing the puppy, and we assign that instance to the variable my_dog.
 接下来，Python 返回⼀个表⽰这条⼩狗的实例，⽽我们将这个实例赋给变量 my_dog。
 
-  0.1Access Properties  访问属性
+  0.1 Access Properties  访问属性
 To access the properties of an instance, use a dot.
 要访问实例的属性，可使⽤点号。
-
 my_dog.name     print(f"My dog's name is {my_dog.name}.")
 
+Periods are commonly used in Python, and this syntax demonstrates how Python can get the value of a property.
+点号在 Python 中很常⽤，这种语法演⽰了 Python 如何获取属性的值。
 
+Here, Python finds the instance my_dog and then the genus associated with the instance Sex name.
+在这⾥，Python 先找到实例 my_dog，再查找与这个实例相关联的属性 name。
+
+ When referencing this property in the Dog class, self.name is used.
+在 Dog 类中引⽤这个属性时，使⽤的是 self.name。
+
+  0.2   Call the method  调用方法
+my_dog.roll_over()
+
+To call a method, specify the instance name (in this case, my_dog) and the method you want to call, separated by periods.
+要调⽤⽅法，需指定实例名（这⾥是 my_dog）和想调⽤的⽅法，并⽤句点分隔。
+
+When encountering code my_dog.sit(), Python looks for method sit() in the class Dog and runs its code.
+在遇到代码 my_dog.sit() 时，Python 在类 Dog 中查找⽅法 sit() 并运⾏其代码。
+
+  0.3 Create multiple instances 创建多个实例
+That's where classes come in. When you create a mold (class), you can use the mold (class) to create any number of parts (instances)
+这就是类的作用了。当创建了一个模具（类）的时候，就可以用模具（类）创建任意多个零件（实例）
+
+9.2 Use classes and instances  使用类和实例
+Once the class is written, most of the time will be spent creating instances. 
+One of the first tasks is to modify the properties of an instance in a number of ways.
+类编写好后，⼤部分时间将花在创建实例上。⾸要任务之⼀是，用多种方法修改实例的属性。
+
+9.2.1 Car
+# class Car:
+#     def __init__(self, make, model, year):
+#         self.make = make
+#         self.model = model
+#         self.year = year
+#
+#     def get_descriptive_name(self):
+#         long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+#         return long_name.title()
+
+# my_car = Car('audi', 'a8', 2024)
+# print(my_car.get_descriptive_name())
+
+This method takes the values of these parameters and assigns them to the properties of the instance created from this class.
+When you create a new instance of Car, you need to specify its manufacturer, model, and year of manufacture.
+定义__init__() ⽅法。这个⽅法接受这些形参的值，并将它们赋给根据这个类创建的实例的属性。
+在创建新的 Car 实例时，需要指定其制造商、型号和⽣产年份。
+
+Create an instance based on the Car class and assign it to the variable my_new_car.
+根据Car 类创建⼀个实例，并将其赋给变量 my_new_car。
+
+Next, call the get_descriptive_ name() method to indicate what kind of car we have
+接下来，调⽤ get_descriptive_ name() ⽅法，指出我们拥有⼀辆什么样的汽⻋
+
+9.2.2 Specify a default value for the property 给属性指定默认值
+
+Some properties do not need to be defined by form parameters, and can be specified as default values in the __init__() method.
+有些属性⽆须通过形参来定义，可以在 __init__() ⽅法中为其指定默认值。
+
+# class Car:
+#     def __init__(self, make, model, year):
+#         self.make = make
+#         self.model = model
+#         self.year = year
+#   self.odometer_reading = 0
+#
+#     def get_descriptive_name(self):
+#         long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+#         return long_name.title()
+
+#     def read_odometer(self):
+#         print(f"This car has {self.odometer_reading} miles on it.")
+
+# my_car = Car('audi', 'a8', 2024)
+# print(my_car.get_descriptive_name())
+# my_car.read_odometer()
+
+We've added a property called odometer_reading, which always has an initial value of 0.
+我们添加了⼀个名为 odometer_reading 的属性，其初始值总是为 0。
+
+We've also added a method called read_odometer() to read the odometer of the car
+我们还添加了⼀个名为 read_odometer() 的⽅法，⽤于读取汽⻋的⾥程表
+
+9.2.3 Modify the value of the attribute 修改属性的值
+  0.1 modify it directly from an instance 通过实例直接修改
+
+---snip---
+# my_car.odometer_reading = 23
+# my_car.read_odometer()
+
+Use the dots to access and set the properties of the car directly odometer_reading.
+使⽤点号直接访问并设置汽⻋的属性 odometer_reading。
+
+This line of code asks Python to find the property odometer_reading in instance my_new_car and set its value to 23:
+这⾏代码让 Python 在实例 my_new_car 中找到属性odometer_reading，并将其值设置为 23：
+并且用my_new_car.read_odometer()打印出属性odometer_reading的值
+
+  0.2 Modify properties via methods 通过方法修改属性
+
+#     def update_odometer(self, mileage):
+#         if mileage >= self.odometer_reading:
+#             self.odometer_reading = mileage
+#         else:
+#             print("You can't roll back an odometer !")
+
+# my_car.update_odometer(1000)
+# my_car.read_odometer()
+
+The update_odometer() method has been added. This method takes a mileage value and assigns it to the self.odometer_reading.
+添加了 update_odometer() ⽅法。这个⽅法接受⼀个⾥程值，并将其赋给 self.odometer_reading。
+
+  0.3 Increment the value of the property by method 通过方法让属性值递增
+
+#     def increment_odometer(self, mile):
+#         self.odometer_reading += mile
+
+# my_car = Car('audi', 'a8', 2024)
+# my_car.update_odometer(1000)
+# my_car.read_odometer()
+#
+# my_car.increment_odometer(100)
+# my_car.read_odometer()
+
+The new method increment_odometer() takes a number in miles and adds it to self.odometer_reading.
+First, create a used my_car.
+Then, call the update_odometer() method and pass in 23_500 to set the odometer reading for the used car to 23 500.
+Finally, call increment_odometer() and pass in 100 to increase the 100 miles traveled from purchase to enrollment
+新增的⽅法 increment_odometer() 接受⼀个单位为英⾥的数，并将其加到 self.odometer_reading 上。
+⾸先，创建⼀辆⼆⼿⻋my_car。
+然后，调⽤update_odometer() ⽅法并传⼊ 23_500，将这辆⼆⼿⻋的⾥程表读数设置为 23 500。
+最后，调⽤ increment_odometer() 并传⼊ 100，以增加从购买到登记期间⾏驶的 100 英⾥
+
+9.3 inheritance 继承
+
+# class ElectricCar(Car):
+    """模拟电动车的独特之处"""
+#     def __init__(self, make, model, year):
+        """先初始化父类的属性，再初始化电动车特有的属性"""
+#         super().__init__(make, model, year)
+#         self.battery_size = 40
+#
+#     def describe_battery(self):
+"""打印一条电池容量的消息"""
+#         print(f"This car has {self.battery_size} kwh battery on it.")
+
+# my_leaf = ElectricCar('nissan', 'leaf', 2024)
+# print(my_leaf.get_descriptive_name())
+# my_leaf.describe_battery()
+
+Add a new property self.battery_size and set its initial value (40). 
+All instances created from the ElectricCar class will contain this property, but all Car instances will not contain it.
+添加新属性self.battery_size，并设置其初始值（40）。根据 ElectricCar 类创建的所有实例都将包含这个属性，但所有的 Car 实例都不包含它。
+
+9.3.3 Override the properties of the parent class 重写父类的属性
+
+class ElectricCar(Car):
+ --snip--
+ def fill_gas_tank(self):
+ """电动汽⻋没有油箱"""
+ print("This car doesn't have a gas tank!"）
+
+9.3.4 composition 组合
+Splitting a large class into multiple subclasses that work together is called composition
+将⼤型类拆分成多个协同⼯作的⼩类，这种⽅法称为组合
+
+class Car:
+---snip---
+
+class Battery:
+    """一次模拟电动车的电池的简单尝试"""
+    def __init__(self, battery_size=40):
+        """初始化电池的属性"""
+        self.battery_size = battery_size
+
+    def describe_battery(self):
+        """打印一条表示电池容量的消息"""
+        print(f"This car has {self.battery_size}-kwh battery.")
+
+class ElectricCar(Car):
+    """模拟电动车的独特之处"""
+    def __init__(self, make, model, year):
+        """先初始化父类的属性，再初始化电动车特有的属性"""
+        super().__init__(make, model, year)
+        self.battery = Battery()
+
+my_leaf = ElectricCar('nissan', 'leaf', 2024)
+ print(my_leaf.get_descriptive_name())
+ my_leaf.battery.describe_battery()
+
+The __init__() method has a parameter battery_size in addition to self. 
+This parameter is optional: if it is not given a value, the battery capacity will be set to 40.
+__init__() ⽅法在 self 之外还有⼀个形参 battery_size。这个形参是可选的：如果没有给它提供值，电池容量将被设置为 40。
+
+In the ElectricCar class, add a property called self.battery.
+This line of code asks Python to create a new Battery instance (default 40 because no capacity is specified) and assign the instance to the property self.battery.
+This is done whenever the __init__() method is called, so each ElectricCar instance now contains an automatically created Battery instance.
+在 ElectricCar 类中，添加⼀个名为 self.battery 的属性。
+这⾏代码让 Python 创建⼀个新的 Battery 实例（因为没有指定容量，所以为默认值 40），并将该实例赋给属性 self.battery。
+每当__init__() ⽅法被调⽤时，都将执⾏该操作，因此现在每个ElectricCar 实例都包含⼀个⾃动创建的 Battery 实例。
+
+我们创建⼀辆电动汽⻋，并将其赋给变量 my_leaf。在描述电池时，需要使⽤电动汽⻋的属性 battery：
+my_leaf.battery.describe_battery()
+这⾏代码让 Python 在实例 my_leaf 中查找属性 battery，并对存储在该属性中的 Battery 实例调⽤ describe_battery() ⽅法。
+
+Batteries can now be described in more detail and without cluttering the class
+现在可以更加详细的描述电池，并且不会让类显得很混乱
+
+    def get_range(self):
+        """打印一条显示电动车续航里程的消息"""
+        if self.battery_size == 40:
+            range = 150
+            print(f"This car can go about {range} miles on a full charge.")
+        elif self.battery_size == 60:
+            range = 300
+            print(f"This car can go about {range} miles on a full charge.")
+❶my_leaf.battery.get_range()
+
+为了使⽤这个⽅法，也需要通过汽⻋的属性 battery 来调⽤（⻅❶）。
+
+9.3.5 Simulate the real thing 模拟实物
+
+9.4 Import classes 导入类
+Import multiple classes from a single module  从⼀个模块中导⼊多个类
+from car import Car, ElectricCar
+
+Import the entire module  导⼊整个模块
+import car
+
+Import another module within a module  在⼀个模块中导⼊另⼀个模块
+in electric_car.py
+from car import Car
+ElectricCar 类需要访问其⽗类 Car，因此直接将 Car 类导⼊该模块。
+
+in my_cars.py
+from car import Car
+from electric_car import ElectricCar
+
+Use aliases 使用别名
+from electric_car import ElectricCar as EC
+
+9.5 Python Standard Library Python标准库
+randint()将两个整数作为参数，并随机返回⼀个位于这两个整数之间（含）的整数
+另⼀个很有⽤的函数是 choice()。它将⼀个列表或元组作为参数，并随机返回其中的⼀个元素
+
+先模拟彩票号码出现
+# from random import choice
+# lottery = [1,2,3,4,5,"a","b","c","d","e","f","g","h","i","j"]
+# prize = ["f", "f", 3, 1]
+# my_ticket = []
+# count = 0
+
+再模拟要几次才能中奖
+# from random import choice
+#
+# lottery = [1, 2, 3, 4, 5, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+# prize = ["f", "f", 3, 1]  # 假设中奖号码是 ["f", "f", 3, 1]
+# count = 0
+#
+# while True:
+#     my_ticket = []         #**每一次循环都要归零
+#     # 生成 4 位彩票号码
+#     for _ in range(4):
+#         my_ticket.append(choice(lottery))
+#     count += 1
+#
+#     # 检查是否中奖（假设中奖号码需要完全匹配）
+#     if my_ticket == prize:
+#         break
+#
+# print(f"After {count} attempts, you won the prize!")
