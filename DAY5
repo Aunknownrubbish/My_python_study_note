@@ -1,0 +1,64 @@
+On the fifth day, I continued to learn about the usage of functions
+第五天，我继续学习了有关函数的用法
+
+I learned to refer to * to pass any number of arguments, 
+and I can put different types of arguments together, but in this case, I need to put any number of arguments at the end, such as
+我学会了引用 * 来传递任意数量的实参,
+并且可以将不同类型的实参放在一起，只不过这种情况需要将任意数量的实参放在最后面，例如
+
+# def make_pizza(size, *toppings):
+#     print(f"make a {size} inch pizza with following toppings:")
+#     for topping in toppings:
+#         print(topping)
+# make_pizza(16,"cheese","cherry")
+
+Sometimes we don't know what type of information is to be passed to the function.
+At this time, we can use the dictionary to pass it, 
+because it has key value pairs, both keys and values, which is most suitable for dealing with this problem
+有时候我们并不知道将要传递给函数的是什么类型的信息，
+这时候就可以用字典来传递，
+因为他有键值对，既有键又有值，最适合用来处理这个问题
+
+# def build_profile(first, last, **user_info):
+"""创建一个字典，里面包含我们知道的所有用户信息"""
+#     user_info["first_name"] = first
+#     user_info["last_name"] = last
+#     return user_info
+# user_profile = build_profile('albert', 'einstein', location='San Francisco', field='Fake Field')
+# print(user_profile)
+
+Finally, I learned the module. The function of the module is to hide the details of the code and focus on the high-level logic.
+And when there is a problem, you only need to repair the relevant module, which is very convenient
+When the function name is too complex, you can use an alias
+最后我学习了模块。模块的作用是可以隐藏代码的细节，将关注点放在高层逻辑上。
+并且当出现问题时，只需要修复相关的模块就可以了，非常的方便
+当函数名太复杂的时候，可以使用别名
+
+Import entire module
+导入整个模块
+# import pizz（这是文件名）
+
+Import specific functions
+导入特定函数
+from module_name import function_0, function_1, function_2
+
+Use as to assign aliases to functions
+使用as给函数指定别名
+from module_name import function_name as fn
+
+Use as to assign an alias to a module
+使用as给模块指定别名
+import module_name as mn
+
+Finally, I learned the relevant rules when writing functions, two of which are more important
+最后，我学习了函数编写时的相关规则，其中有两点比较重要
+
+When specifying default values for formal parameters, there should be no spaces around the equal sign
+在给形参指定默认值时，等号两边不要有空格
+def function_name(parameter_0, parameter_1='default value')
+
+Keyword arguments in function calls should also follow this Convention
+函数调⽤中的关键字实参也应遵循这种约定
+function_name(value_0, parameter_1='value')
+
+
