@@ -1,0 +1,172 @@
+Learn today Chapter 10: Files and Exceptions. I thought it would be easier than yesterday, but I didn't expect it to be a little difficult to understand
+今天学习第十章：文件和异常。本以为会比昨天简单，但没想到还是有点难理解
+
+10.1 Read the file 读取文件
+10.1.1读取文件的全部内容
+from pathlib import Path             #从pathlib里导入Path类
+❶ path = Path('pi_digits.txt')       #创建了⼀个表⽰⽂件 pi_digits.txt 的Path 对象，并将其赋给了变量 path
+❷ contents = path.read_text()        #⽤ read_text() ⽅法来读取这个⽂件的全部内容，将该⽂件的全部内容作为⼀个字符串返回，将这个字符串赋给了变量 contents
+ print(contents)
+
+10.1.3访问文件的各行
+⽤ splitlines() ⽅法将冗⻓的字符串转换为⼀系列⾏
+
+from pathlib import Path
+ path = Path('pi_digits.txt')
+❶ contents = path.read_text()     #读取⽂件的全部内容
+❷ lines = contents.splitlines()   #plitlines() ⽅法返回⼀个列表，其中包含⽂件中所有的⾏，将这个列表赋给了变量 lines
+ for line in lines:
+ print(line)
+
+在读取⽂本⽂件时，Python 将其中的所有⽂本都解释为字符串。
+如果读取的是数，并且要将其作为数值使⽤，就必须使⽤ int()函数将其转换为整数，或者使⽤ float() 函数将其转换为浮点数。
+
+10.2写入文件
+要将多⾏写⼊⽂件，需要先创建⼀个字符串（其中包含要写⼊⽂件的全部内容），再调⽤ write_text() 并将这个字符串传递给它。
+from pathlib import Path
+contents = "I love programming.\n"             #定义变量 contents，⽤于存储要写⼊⽂件的所有内容
+contents += "I love creating new games.\n"
+path = Path('programming.txt')
+path.write_text(contents)
+在对 path 对象调⽤ write_text() ⽅法时，务必谨慎。如果指定的⽂件已存在， write_text() 将删除其内容写⼊其中。
+
+10.3异常
+10.3.1 处理 ZeroDivisionError 异常
+# print("Give me two numbers and I will divide them.")
+# print("Enter 'q' to quit\n")
+# while True:
+#     first_number = input("Enter the first number: ")
+#     if first_number == 'q':
+#         break
+#     second_number = input("Enter the second number: ")
+#     if second_number == 'q':
+#         break
+#     if second_number == '0':
+#         try:
+#             result = int(first_number) / int(second_number)
+#         except ZeroDivisionError:
+#             print("You can't divide by zero")
+#     else:
+#         result = int(first_number) / int(second_number)
+#         print(f"The answer is {result}\n")
+
+10.3.5 处理 FileNotFoundError 异常
+# from pathlib import Path
+# path = Path("alice.txt")
+# try:
+#     centent = path.read_text(encoding="utf-8")
+# except FileNotFoundError:
+#     print(f"File {path} not found")
+
+10.3.6分析文本
+from pathlib import Path
+ path = Path('alice.txt')
+ try:
+ contents = path.read_text(encoding='utf-8')
+ except FileNotFoundError:
+ print(f"Sorry, the file {path} does not exist.")
+ else:
+ #计算⽂件⼤致包含多少个单词
+❶ words = contents.split()
+❷ num_words = len(words)
+ print(f"The file {path} has about {num_words} words.")
+
+10.3.8静默失败      #pass
+def count_words(path):
+ """计算⼀个⽂件⼤致包含多少个单词"""
+ try:
+ --snip--
+ except FileNotFoundError:
+ pass
+ else:
+ --snip--
+
+10.4存储数据
+10.4.1 使⽤ json.dumps() 和 json.loads()
+json.dumps() 函数接受⼀个实参，即要转换为 JSON 格式的数据。这个函数返回⼀个字符串，这样你就可将其写⼊数据⽂件了
+
+from pathlib import Path
+ import json
+ numbers = [2, 3, 5, 7, 11, 13]
+❶ path = Path('numbers.json')            #选择⼀个⽂件名，指定要将该数值列表存储到哪个⽂件中
+❷ contents = json.dumps(numbers)         #使⽤ json.dumps() 函数⽣成⼀个字符串，它包含我们要存储的数据的 JSON 表⽰形式
+ path.write_text(contents)               #使⽤ write_text() ⽅法将其写⼊⽂件
+
+下⾯再编写⼀个程序，使⽤ json.loads() 将这个列表读取到内存中：
+
+from pathlib import Path 
+ import json
+❶ path = Path('numbers.json')           #确保读取的是前⾯写⼊的⽂件
+❷ contents = path.read_text()           #这个数据⽂件是使⽤特殊格式的⽂本⽂件，因此可使⽤ read_text() ⽅法来读取它
+❸ numbers = json.loads(contents)        #将这个⽂件的内容传递给 json.loads()
+ print(numbers)
+
+10.4.2保存和读取用户生成的数据
+先来存储用户名字
+from pathlib import Path
+ import json
+❶ username = input("What is your name? ")
+❷ path = Path('username.json')                            #将收集到的数据写⼊⽂件username.json，并且赋给变量path
+ contents = json.dumps(username)
+ path.write_text(contents)
+❸ print(f"We'll remember you when you come back, {username}!")
+
+现在再编写⼀个程序，向名字已被存储的⽤户发出问候：
+from pathlib import Path
+ import json
+❶ path = Path('username.json')            #读取数据⽂件的内容
+ contents = path.read_text()              #使⽤json.loads() 将恢复的数据赋给变量 username
+❷ username = json.loads(contents)
+ print(f"Welcome back, {username}!")
+
+将这两个程序合并到⼀个程序中。在这个程序运⾏时，将尝试从内存中获取⽤户的⽤户名。如果没有找到，就提⽰⽤户输⼊⽤户名，并将其存储到⽂件 username.json 中，以供下次使⽤。
+import json
+ path = Path('username.json')
+❶ if path.exists():
+ contents = path.read_text()
+ username = json.loads(contents)
+ print(f"Welcome back, {username}!")
+❷ else:
+ username = input("What is your name? ")
+ contents = json.dumps(username)
+ path.write_text(contents)
+ print(f"We'll remember you when you come back, {username}!")
+
+10.4.3重构
+
+# from pathlib import Path
+# # import json
+#
+# def get_stored_username(path):
+#     """"如果存储了用户名，就获取它"""
+#     if path.exists():
+#         contents = path.read_text()
+#         username = json.loads(contents)
+#         return username
+#     else:
+#         return None
+#
+# def get_new_username(path):
+#     """提示用户输入用户名"""
+#     username = input("enter your username: ")
+#     content = json.dumps(username)
+#     path.write_text(content)
+#     return username
+#
+# def greet_user():
+#     """问候用户"""
+#     path = Path("username.json")
+#     username = get_stored_username(path)
+#     if username:
+#         print(f"Welcome back, {username}!")
+#     else:
+#         username = get_new_username(path)
+#         print(f"We'll remember you when you come back, {username}!")
+#
+# greet_user()
+
+
+
+
+
+
