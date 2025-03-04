@@ -1,0 +1,102 @@
+今天学的第十一章 测试代码
+11.2测试函数
+name_funciton.py
+def get_formatted_name(first, last):
+ """⽣成格式规范的姓名"""
+ full_name = f"{first} {last}"
+ return full_name.title()
+
+from name_function import get_formatted_name
+❶ def test_first_last_name():              #测试函数的名称应该⽐典型的函数名更⻓，更具描述性。你⾃⼰不会调⽤测试函数，⽽是由 pytest 替你查找并运⾏它们。因此，测试函数的名称应⾜够⻓，让你在测试报告中看到它们时，能清楚地知道它们测试的是哪些⾏为
+ """能够正确地处理像 Janis Joplin 这样的姓名吗？"""
+❷ formatted_name = get_formatted_name('janis', 'joplin')          #这⾥在调⽤ get_formatted_name() 函数时向它传递了实参 'janis' 和'joplin'。将这个函数的返回值赋给变量 formatted_name。
+❸ assert formatted_name == 'Janis Joplin'
+
+在测试未通过时，不要修改测试。如果你这样做，即便能让测试通过，像测试那样调⽤函数的代码也将突然崩溃。
+相反，应修复导致测试不能通过的代码：检查刚刚对函数所做的修改，找出这些修改是如何导致函数⾏为不符合预期的。
+
+11.3测试类
+class AnonymousSurvey:
+ """收集匿名调查问卷的答案"""
+❶ def __init__(self, question):               #存储⼀个调查问题
+ """存储⼀个问题，并为存储答案做准备"""
+ self.question = question
+ self.responses = []
+❷ def show_question(self):
+ """显⽰调查问卷"""
+ print(self.question)
+❸ def store_response(self, new_response):
+ """存储单份调查答卷"""
+ self.responses.append(new_response)
+❹ def show_results(self):
+ """显⽰收集到的所有答卷"""
+ print("Survey results:")
+ for response in self.responses:
+ print(f"- {response}")
+
+要创建这个类的实例，只需提供⼀个问题即可。有了表⽰调查的实例，就可以使⽤ show_question() 来显⽰其中的问题，
+使⽤store_response() 来存储答案，并使⽤ show_results() 来显⽰调查结果了。
+
+下面是这个程序的使用过程
+from survey import AnonymousSurvey
+# 定义⼀个问题，并创建⼀个表⽰调查的 AnonymousSurvey 对象
+question = "What language did you first learn to speak?"
+language_survey = AnonymousSurvey(question)
+# 显⽰问题并存储答案
+language_survey.show_question()
+print("Enter 'q' at any time to quit.\n")
+while True:
+ response = input("Language: ")
+ if response == 'q':
+ break
+ language_survey.store_response(response)
+# 显⽰调查结果
+print("\nThank you to everyone who participated in the survey!")
+language_survey.show_results()
+
+以下是测试过程
+# from survey import AnonymousSurvey
+# def test_store_single_language():
+#     question = "What language did you first learn?"
+#     language_survey = AnonymousSurvey(question)
+#     language_survey.store_response("english")
+#     assert "english" in language_survey.responses
+
+# from survey import AnonymousSurvey
+# def test_store_three_languages():
+#     question = "What language did you first learn?"
+#     language_survey = AnonymousSurvey(question)
+#     responses = ["chinese", "english", "french"]
+#     for response in responses:
+#         language_survey.store_response(response)
+#
+#     for response in responses:
+#         assert response in language_survey.responses
+
+以下是使用夹具测试的过程
+# import pytest
+# from survey import AnonymousSurvey
+#
+#
+# @pytest.fixture
+# def language_survey():
+#     """⼀个可供所有测试函数使⽤的 AnonymousSurvey 实例"""
+#     question = "What language did you first learn?"
+#     language_survey = AnonymousSurvey(question)
+#     return language_survey
+#
+#
+# def test_store_single_response(language_survey):
+#     """测试单个答案会被妥善地存储"""
+#     language_survey.store_response('English')
+#     assert 'English' in language_survey.responses
+#
+#
+# def test_store_three_response(language_survey):
+#     """测试三个答案会被妥善地存储"""
+#     responses = ['English', 'Spanish', 'Mandarin']
+#     for response in responses:
+#         language_survey.store_response(response)
+#
+#     for response in responses:
+#         assert response in language_survey.responses
